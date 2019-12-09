@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="QuestionViewDlg" widgetVar="QuestionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewQuestionTitle}">
+            <h:form id="QuestionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{questionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewQuestionLabel_idQuestion}"/>
+                        <h:outputText value="#{questionController.selected.idQuestion}" title="#{bundle.ViewQuestionTitle_idQuestion}"/>
+                        <h:outputText value="#{bundle.ViewQuestionLabel_questionText}"/>
+                        <h:outputText value="#{questionController.selected.questionText}" title="#{bundle.ViewQuestionTitle_questionText}"/>
+                        <h:outputText value="#{bundle.ViewQuestionLabel_questionPoints}"/>
+                        <h:outputText value="#{questionController.selected.questionPoints}" title="#{bundle.ViewQuestionTitle_questionPoints}"/>
+                        <h:outputText value="#{bundle.ViewQuestionLabel_questionType}"/>
+                        <h:outputText value="#{questionController.selected.questionType}" title="#{bundle.ViewQuestionTitle_questionType}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="QuestionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

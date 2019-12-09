@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CandidateViewDlg" widgetVar="CandidateViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCandidateTitle}">
+            <h:form id="CandidateViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{candidateController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCandidateLabel_introduction}"/>
+                        <h:outputText value="#{candidateController.selected.introduction}" title="#{bundle.ViewCandidateTitle_introduction}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_recommendations}"/>
+                        <h:outputText value="#{candidateController.selected.recommendations}" title="#{bundle.ViewCandidateTitle_recommendations}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_visits}"/>
+                        <h:outputText value="#{candidateController.selected.visits}" title="#{bundle.ViewCandidateTitle_visits}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_recommendedIdList}"/>
+                        <h:outputText value="#{candidateController.selected.recommendedIdList}" title="#{bundle.ViewCandidateTitle_recommendedIdList}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_image}"/>
+                        <h:outputText value="#{candidateController.selected.image}" title="#{bundle.ViewCandidateTitle_image}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_email}"/>
+                        <h:outputText value="#{candidateController.selected.email}" title="#{bundle.ViewCandidateTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_username}"/>
+                        <h:outputText value="#{candidateController.selected.username}" title="#{bundle.ViewCandidateTitle_username}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_firstName}"/>
+                        <h:outputText value="#{candidateController.selected.firstName}" title="#{bundle.ViewCandidateTitle_firstName}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_lastName}"/>
+                        <h:outputText value="#{candidateController.selected.lastName}" title="#{bundle.ViewCandidateTitle_lastName}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_id}"/>
+                        <h:outputText value="#{candidateController.selected.id}" title="#{bundle.ViewCandidateTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_salt}"/>
+                        <h:outputText value="#{candidateController.selected.salt}" title="#{bundle.ViewCandidateTitle_salt}"/>
+                        <h:outputText value="#{bundle.ViewCandidateLabel_password}"/>
+                        <h:outputText value="#{candidateController.selected.password}" title="#{bundle.ViewCandidateTitle_password}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CandidateViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

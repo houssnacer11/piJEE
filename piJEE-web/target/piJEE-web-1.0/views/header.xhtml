@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{postingModel.checkAuth()}" />
+</f:metadata>
+    <header id="header" >
+        <div class="container">
+            <div class="row align-items-center justify-content-between d-flex">
+                <h:form>
+                <div id="logo">
+                    <a href="index.html">ByUsForUs</a>
+                </div>
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="index.html">Home</a></li>
+                        <li><h:commandLink action="#{candidateViewController.cdtConnected()}"/></li>
+                        <li><a href="category.html">Category</a></li>
+                        <li><b:navLink value="News feed" href="/webapp/views/posts/newsFeed.xhtml"></b:navLink></li>
+                        <li><a href="blog-home.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li class="menu-has-children"><a href="">Pages</a>
+                            <ul>
+                                <li><a href="elements.html">elements</a></li>
+                                <li><a href="search.html">search</a></li>
+                                <li><a href="single.html">single</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="ticker-btn" href="#">Signup</a></li>
+                        <li><a class="btn-flat" href="#"><p:commandLink value="Logout" action="#{signUpBean.doLogout()}"/></a></li>				          				          
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+                </h:form>
+            </div>
+        </div>
+    </header><!-- #header -->
+</ui:composition>

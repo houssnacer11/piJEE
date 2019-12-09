@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChoiceEditDlg" widgetVar="ChoiceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditChoiceTitle}">
+            <h:form id="ChoiceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{choiceController.selected != null}">
+                        <p:inputText id="choiceText" value="#{choiceController.selected.choiceText}" title="#{bundle.EditChoiceTitle_choiceText}" />
+                        <p:outputLabel value="#{bundle.EditChoiceLabel_isCorrectChoice}" for="isCorrectChoice" />
+                        <p:selectBooleanCheckbox id="isCorrectChoice" value="#{choiceController.selected.isCorrectChoice}" />
+                        <p:outputLabel value="#{bundle.EditChoiceLabel_choicePoints}" for="choicePoints" />
+                        <p:inputText id="choicePoints" value="#{choiceController.selected.choicePoints}" title="#{bundle.EditChoiceTitle_choicePoints}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{choiceController.update}" value="#{bundle.Save}" update="display,:ChoiceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ChoiceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ChoiceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

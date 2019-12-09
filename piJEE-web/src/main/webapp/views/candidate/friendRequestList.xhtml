@@ -1,0 +1,145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/templates/template_front.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title"><title>Home</title></ui:define>
+
+    <ui:define name="content">
+        <!-- start banner Area -->
+        <h:head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+            <link rel="stylesheet" href="style.css" />
+            <!--link rel="stylesheet" href="https://fonts.googleapis.com/css"/-->
+            <link rel="canonical" href="http://localhost:8084/piJEE-web-1.0/signUp.xhtml" />
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+        </h:head>
+        <h:body style="background : url('backgroud.jpg'); background-color: lightskyblue; font-size: 12px;" id="myBody" >
+            <div class="container" style="background : url('backgroud.jpg'); background-color: #ccccff;">
+                <div class="row" style="background-color: white; padding: 5px; margin-top: 60px; margin-bottom: 40px">
+                    <div class="col-md-3" >
+                        <h:form id="AdminForm">
+                            <p:panel header="Admin" toggleable="true" toggleOrientation="horizontal" style="text-align: center;">
+                                <f:facet name="header" >
+                                    <p:outputLabel value="Candidate" />
+                                </f:facet> 
+                                <p:panelGrid columns="1" layout="grid" style="font-size: 12px;text-align: center; width: inherit;" >
+                                    <p:commandLink >
+                                        <p:graphicImage value="user.png" height="90px" width="100px"  />
+                                    </p:commandLink>
+                                    <p:outputLabel value="#{candidateViewController.connectedCdt.firstName} #{candidateViewController.connectedCdt.lastName}"/>
+
+                                    <p:commandLink value="#{candidateViewController.connectedCdt.email}"/>
+                                </p:panelGrid>
+                                <f:facet name="actions">
+                                    <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText title="view detail" value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                                <f:facet name="options">
+                                    <p:menu >
+                                        <p:menuitem value="Candidates"  icon="pi pi-clone" action="#{candidateViewController.candidatesList()}" ajax="false"/>
+                                        <p:menuitem value="Profile"  icon="pi pi-times" action="#{candidateViewController.cdtConnected()}" ajax="false"/>
+                                        <p:menuitem value="Job Offers" icon="pi pi-clone" action="#{candidateViewController.jobofferList()}" ajax="false" />
+                                        <p:menuitem value="Companies"  icon="pi pi-times" action="#{companyViewController.listComp()}" />
+                                        <p:menuitem value="Friends"  icon="pi pi-clone" action="#{candidateViewController.friendList()}" />
+                                        <p:menuitem value="Friend Requests #{candidateViewController.friendRequestNumber()}"  icon="pi pi-times" action="#{candidateViewController.friendRequestList()}" />
+
+                                    </p:menu>
+                                </f:facet>
+                            </p:panel>
+                        </h:form>
+                        <p:panel header="Job offers you might like"  toggleable="true" toggleOrientation="horizontal" style="text-align: center; height: auto;margin-bottom: auto; display: list-item">
+                            <!--p:panelGrid -->
+                            <p:dataScroller value="#{candidateViewController.customJobs()}" var="job" chunkSize="2" >
+
+                                <p:panelGrid  columns="2"  style ="width: 100%" columnClasses="logo,detail">
+                                    <p:graphicImage value="byusforus.png" style="height: 20px; width: 20px;"/> 
+                                    <p:outputPanel style="width: auto">
+                                        <h:panelGrid columns="2" cellpadding="1">
+                                            <h:outputText value="Title:" />
+                                            <h:outputText value="#{job.title}" style="font-weight: bold"/>
+
+                                            <h:outputText value="Positions:" />
+                                            <h:outputText value="#{job.peopleNeeded}" style="font-weight: bold"/>
+                                            <h:outputText value="Status:" />
+                                            <h:outputText value="#{job.offerStatus}" style="font-weight: bold"/>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                    <f:facet name="footer">
+                                        <p:commandLink value="Preview"  action="#{candidateViewController.doPreviewOffer()}">
+                                            <f:setPropertyActionListener value="#{job}" target="#{candidateViewController.selectedOffer}" />
+                                        </p:commandLink>
+                                    </f:facet>
+                                </p:panelGrid>
+
+                            </p:dataScroller>
+                            <!--/p:panelGrid-->
+                            <f:facet name="actions">
+                                <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                            </f:facet>
+                        </p:panel>
+                    </div>
+                    <div class="col-md-6" style="background-color: white; padding: 5px; margin-top: 0px; margin-bottom: 1000px">
+
+                        <h:form id="postForm">
+                            <p:panel header="Manage Posts Here">
+                                <p:outputLabel value="Manage Posts HERE"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                            </p:panel>
+                        </h:form>
+                        <h:form id="feedsForm">
+                            <p:panel>
+                                <h:form id="form">
+                                    <p:dataView var="cdt" value="#{candidateViewController.friendRequests}" rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
+                                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+                                        <p:dataViewListItem>
+                                            <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                                                <p:graphicImage value="user.png" height="70px" width="70px" /> 
+
+                                                <p:outputPanel>
+                                                    <h:panelGrid columns="2" cellpadding="5">
+                                                        <h:outputText value="First name:" />
+                                                        <h:outputText value="#{cdt.firstName}" style="font-weight: bold"/>
+
+                                                        <h:outputText value="Email:" />
+                                                        <h:outputText value="#{cdt.email}" style="font-weight: bold"/>
+
+                                                        <h:outputText value="Recommendations:" />
+                                                        <h:outputText value="#{cdt.recommendations}" style="font-weight: bold"/>
+                                                        <h:commandButton value="Accept" action="#{candidateViewController.acceptFriendRequest()}">
+                                                            <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;" />
+                                                            <f:setPropertyActionListener value="#{cdt}" target="#{candidateViewController.cdt}" />
+                                                        </h:commandButton>
+                                                        <h:commandButton value="Reject" action="#{candidateViewController.rejectFriendRequest()}" >
+                                                            <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;" />
+                                                            <f:setPropertyActionListener value="#{cdt}" target="#{candidateViewController.cdt}" />
+                                                        </h:commandButton>
+                                                    </h:panelGrid>
+
+                                                </p:outputPanel>
+
+
+                                            </h:panelGrid>
+                                        </p:dataViewListItem>
+                                    </p:dataView>
+
+                                </h:form>
+                            </p:panel>
+                        </h:form>
+                    </div>
+
+                </div>
+            </div>
+        </h:body>
+        <!-- End download Area -->
+    </ui:define>
+
+
+</ui:composition>
+

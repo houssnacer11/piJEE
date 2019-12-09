@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="QuizTryViewDlg" widgetVar="QuizTryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewQuizTryTitle}">
+            <h:form id="QuizTryViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{quizTryController.selected != null}">
+                        <h:outputText value="#{bundle.ViewQuizTryLabel_quiz}"/>
+                        <h:outputText value="#{quizTryController.selected.quiz.name}" title="#{bundle.ViewQuizTryTitle_quiz}"/>
+                        <h:outputText value="#{bundle.ViewQuizTryLabel_percentage}"/>
+                        <h:outputText value="#{quizTryController.selected.percentage}" title="#{bundle.ViewQuizTryTitle_percentage}"/>
+                        <h:outputText value="#{bundle.ViewQuizTryLabel_startDate}"/>
+                        <h:outputText value="#{quizTryController.selected.startDate}" title="#{bundle.ViewQuizTryTitle_startDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewQuizTryLabel_finishDate}"/>
+                        <h:outputText value="#{quizTryController.selected.finishDate}" title="#{bundle.ViewQuizTryTitle_finishDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewQuizTryLabel_recording}"/>
+                        <video src="../../../#{quizTryController.selected.recording}" controls="controls"></video>
+                        <h:outputText value="#{bundle.ViewQuizTryLabel_candidate}"/>
+                        <h:outputText value="#{quizTryController.selected.candidate.firstName.concat(' ').concat(quizTryController.selected.candidate.lastName)}" title="#{bundle.ViewQuizTryTitle_candidate}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="QuizTryViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

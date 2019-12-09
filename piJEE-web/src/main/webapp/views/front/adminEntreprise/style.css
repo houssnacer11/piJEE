@@ -1,0 +1,48 @@
+.form {
+/*    padding: 40px;
+    margin: 40px auto;*/
+}
+a:hover {
+    color: #179b77;
+}
+.tab-group {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+}
+.tab-group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.tab-group li a {
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+    background: rgba(76, 80, 80, 0.25);
+    color: #FFFFFF;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s ease;
+}
+.tab-group li a:hover {
+    background: #cccccc;
+    color: #ffffff;
+}
+.tab-group .active a {
+    background: #007bff;
+    color: #ffffff;
+}
+
+.tab-content > div:last-child {
+    display: none;
+}
+
+.input {
+    border-radius: 5px;
+    padding: 5px;
+    width: 250px;
+}

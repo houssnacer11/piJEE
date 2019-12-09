@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../../resources/templates/template_front.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title"><title>Quiz Results</title></ui:define>
+
+    <ui:define name="content">
+
+        <!-- Start popular-post Area -->
+        <section class="popular-post-area pt-100">
+            <div class="container">
+                <div class="row justify-content-center d-flex">
+                    <div class="col-lg-12 post-list">          
+                        <div class="single-post justify-content-center centerAll" >
+                            <div>
+                                <h1>Your quiz results</h1>
+                            </div>
+                            <div>
+                                <c:if test="#{quizTryController.breachType eq 'NO_FACE'}">
+                                    <h3 style="margin-bottom: 1em;">No faces have been detected from your webcam feed. This automatically disqualifies you from the quiz.</h3>
+
+                                    <h4 style="margin-bottom: 1em;">If you think this decision is not right, you can submit a claim by clicking here.</h4>
+                                    <video download="download" src="#{quizTryController.recordingBlob}" controls="controls"></video>
+                                    <br></br>
+                                    <a href="#{quizTryController.recordingBlob}" download="MyQuizVid.webm">Download video</a>
+                                </c:if>
+                                <c:if test="#{quizTryController.breachType eq 'NO_BREACH'}">
+                                    <h3>You scored #{quizTryController.selected.percentage}% on the #{quizTryController.selected.quiz.name}</h3>
+                                    <c:if test="#{quizTryController.selected.percentage gt quizTryController.selected.quiz.percentageToPass}">
+                                        <h4>Congratulations! Your score is higher than the required score.
+                                            A company employee will contact you for further steps.</h4>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <h:commandButton class="genric-btn primary" value="Back to Home" action="#{quizController.redirectToTakeQuiz(quizController.firstQuiz)}"/>
+                                    </c:if>
+                                    <c:if test="#{quizTryController.selected.percentage lt quizTryController.selected.quiz.percentageToPass}">
+                                        <h4>Sadly this score does not meet the required score for this quiz.
+                                            We still encourage you to post to other jobs</h4>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <h:commandButton class="genric-btn primary" value="See other jobs" action="#{quizController.redirectToTakeQuiz(quizController.firstQuiz)}"/>
+                                    </c:if>
+                                </c:if>
+                                <br></br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End popular-post Area -->
+
+
+    </ui:define>
+
+
+</ui:composition>

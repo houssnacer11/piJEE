@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../../resources/templates/template_front.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title"><title>Take Quiz</title></ui:define>
+
+    <ui:define name="content">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script> 
+        <h:outputScript name="js/jquery.steps.js" />
+        <h:outputStylesheet name="css/jquery-steps.css"/>
+        <h:outputScript name="js/camvas.js" />
+        <h:outputScript name="js/pico.min.js" />
+        <h:outputScript name="js/pico_detection.js" />
+        <script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+        <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+        <script src="https://cdn.webrtc-experiment.com/common.js"></script>
+
+        <!-- Start popular-post Area -->
+        <section class="popular-post-area pt-100">
+            <div class="container">
+                <div class="row justify-content-center d-flex">
+                    <div class="col-lg-12 post-list">          
+                        <div class="single-post justify-content-center centerAll" >
+                            <h:form>
+                                <h:inputText alt="breachInput" value="#{quizTryController.breachType}"/>
+                                <h:inputText alt="choicesSelected" value="#{quizTryController.selections}"/>
+                                <h:commandButton value="asx" action="#{quizTryController.submitTry(quizController.selected)}" style="display: none"/>
+                            </h:form>
+                            <div>
+                                <h1>#{quizController.selected.name}</h1>
+                            </div>
+                            <p:remoteCommand name="sendBlobBase64" 
+                                             actionListener="#{quizTryController.onBlobBase64Sent()}" process="@this"/>
+                            <p:remoteCommand name="breachDetected" 
+                                             actionListener="#{quizTryController.breachDetected()}" process="@this"/>
+                            <div>
+                                <h:outputText value="Minutes left: #{quizController.selected.duration}" id="duration"/>
+                                <br></br>
+                                <h:outputText value="Required score: #{quizController.selected.percentageToPass}%" />
+                                <br></br>
+                                <h:outputText value="Number of questions: #{questionController.getQuestionsByQuizId(quizController.firstQuiz.id).size()} " />
+                                <br></br>
+                                <br></br>
+                                <canvas width="640" height="480"></canvas>
+                                <button id="btn-stop-recording" style="display:none;">stop</button>
+                                <button id="btn-start-recording" style="display:none;">start</button>
+                            </div>
+
+                            <div id="example-basic">
+                                <ui:repeat value="#{questionController.getQuestionsByQuizId(quizController.selected.id)}" var="question" varStatus="status">
+                                    <h3>#{question.questionText}</h3>
+                                    <input title="#{question.idQuestion}" name="selectedChoices[]" type="hidden"/>
+                                    <section class="everythingSection">
+                                        <h3>#{question.questionText}</h3>
+                                        <div class="choicesSection">
+                                            <p>Please select an answer by clicking on the desired button.</p>
+                                            <ui:repeat value="#{choiceController.getChoicesByQuestionId(question.idQuestion)}" var="choice">
+                                                <h:outputLabel title="#{choice.idChoice}" role="#{question.idQuestion}" onclick="choiceClicked(#{choice.idChoice},#{question.idQuestion})" class="genric-btn success-border radius choiceElement" value="#{choice.choiceText}"/>
+                                            </ui:repeat>
+                                        </div>
+                                    </section>
+                                </ui:repeat>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End popular-post Area -->
+
+        <script type="text/javascript">
+            button_callback();
+            $("#example-basic").steps({
+                headerTag: "h3",
+                bodyTag: "section",
+                transitionEffect: "slideLeft",
+                autoFocus: true,
+                onFinished: function (event, currentIndex) {
+                    var titles = $('input[name^=selectedChoices]').map(function (idx, elem) {
+                        return $(elem).val();
+                    }).get();
+                    console.log(titles);
+                    $("input[alt='choicesSelected']").val(titles);
+                    $("input[alt='breachInput']").val("NO_BREACH");
+                    $("button[id='btn-stop-recording']").click();
+                }
+            });
+            function choiceClicked(idchoice, idQuestion) {
+                $("label[role=" + idQuestion + "]").removeClass().addClass("genric-btn success-border radius choiceElement");
+                $("label[title=" + idchoice + "]").removeClass().addClass("genric-btn success radius choiceElement");
+                $("input[title=" + idQuestion + "]").val(idchoice);
+                $("input[alt='choicesSelected']").val(idchoice);
+            }
+            var video = document.querySelector('video');
+            function captureCamera(callback) {
+                callback(video.srcObject);
+            }
+            function stopRecordingCallback() {
+                video.src = video.srcObject = null;
+                video.muted = false;
+                video.volume = 1;
+                let blob = recorder.getBlob();
+                var reader = new FileReader();
+                var base64data;
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    base64data = reader.result;
+                    console.log(base64data.substr(base64data.indexOf(',') + 1));
+                    sendBlobBase64([{name: 'blobBase64Name', value: base64data}]);
+                }
+                $("input[value='asx']").click();
+                recorder.camera.stop();
+                recorder.destroy();
+                recorder = null;
+            }
+            var recorder; // globally accessible
+            document.getElementById('btn-start-recording').onclick = function () {
+                console.log("start btn clicked");
+                this.disabled = true;
+                captureCamera(function (camera) {
+                    video.muted = true;
+                    video.volume = 0;
+                    video.srcObject = camera;
+                    recorder = RecordRTC(camera, {
+                        type: 'video'
+                    });
+                    recorder.startRecording();
+                    // release camera on stopRecording
+                    recorder.camera = camera;
+                    document.getElementById('btn-stop-recording').disabled = false;
+                });
+            };
+            document.getElementById('btn-stop-recording').onclick = function () {
+                this.disabled = true;
+                recorder.stopRecording(stopRecordingCallback);
+            };
+            
+            
+            
+        </script>
+    </ui:define>
+
+
+</ui:composition>

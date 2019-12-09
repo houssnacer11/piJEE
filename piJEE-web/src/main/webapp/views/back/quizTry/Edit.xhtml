@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="QuizTryEditDlg" widgetVar="QuizTryEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditQuizTryTitle}">
+            <h:form id="QuizTryEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{quizTryController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditQuizTryLabel_quiz}" for="quiz" />
+                        <p:selectOneMenu id="quiz" value="#{quizTryController.selected.quiz}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{quizController.itemsAvailableSelectOne}"
+                                           var="quizItem"
+                                           itemValue="#{quizItem}" itemLabel="#{quizItem.name}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditQuizTryLabel_percentage}" for="percentage" />
+                        <p:inputText id="percentage" value="#{quizTryController.selected.percentage}" title="#{bundle.EditQuizTryTitle_percentage}" />
+                        <p:outputLabel value="#{bundle.EditQuizTryLabel_startDate}" for="startDate" />
+                        <p:calendar id="startDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{quizTryController.selected.startDate}" title="#{bundle.EditQuizTryTitle_startDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditQuizTryLabel_finishDate}" for="finishDate" />
+                        <p:calendar id="finishDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{quizTryController.selected.finishDate}" title="#{bundle.EditQuizTryTitle_finishDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditQuizTryLabel_recording}" for="recording" />
+                        <p:inputText id="recording" value="#{quizTryController.selected.recording}" title="#{bundle.EditQuizTryTitle_recording}" />
+                        <p:outputLabel value="#{bundle.EditQuizTryLabel_candidate}" for="candidate" />
+                        <p:selectOneMenu id="candidate" value="#{quizTryController.selected.candidate}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{candidateController.itemsAvailableSelectOne}"
+                                           var="candidateItem"
+                                           itemValue="#{candidateItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{quizTryController.update}" value="#{bundle.Save}" update="display,:QuizTryListForm:datalist,:growl" oncomplete="handleSubmit(args, 'QuizTryEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="QuizTryEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

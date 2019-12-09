@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/templates/template_front.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title"><title>Home</title></ui:define>
+
+    <ui:define name="content">
+        <!-- start banner Area -->
+        <h:head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+            <!--link rel="stylesheet" href="style.css" /-->
+            <!--link rel="stylesheet" href="https://fonts.googleapis.com/css"/-->
+            <link rel="canonical" href="http://localhost:8084/piJEE-web-1.0/signUp.xhtml" />
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+        </h:head>
+        <h:body style=" background-color: lightskyblue; font-size: 12px;" id="myBody" >
+            <div class="container" style="background : url('backgroud.jpg'); background-color: #ccccff;">
+                <div class="row" style="background-color: white; padding: 5px; margin-top: 60px; margin-bottom: 40px">
+                    <div class="col-md-3">
+                        <h:form id="AdminForm">
+                            <p:panel header="Admin" toggleable="true" toggleOrientation="horizontal" style="text-align: center;">
+                                <f:facet name="header" >
+                                    <p:outputLabel value="#{adminBean.userType}" />
+                                </f:facet>        
+                                <p:panelGrid columns="1" layout="grid" style="font-size: 12px;text-align: center; width: inherit;" >
+                                    <p:commandLink >
+                                        <p:graphicImage value="user.png" height="90px" width="100px"  />
+                                    </p:commandLink>
+                                    <p:outputLabel value="#{adminBean.firstName} #{adminBean.lastName}"/>
+                                    <!--p:outputLabel value="#{adminBean.lastName}"/-->
+                                    <p:commandLink value="#{adminBean.email}"/>
+                                </p:panelGrid>
+                                <f:facet name="actions">
+                                    <h:commandLink action="#{adminBean.profileView()}" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                                <f:facet name="options">
+                                    <p:menu >
+                                        <p:menuitem value="Edit Profile" action="#{adminBean.profileView()}" icon="pi pi-clone"  />
+                                       
+                                    </p:menu>
+                                </f:facet>
+                            </p:panel>
+                        </h:form>
+                        <h:form id="HRForm">
+                            <p:panel header="Human Resource Manager" toggleable="true" toggleOrientation="horizontal" style="text-align: center;">
+                                <p:panelGrid columns="1" layout="grid" style="font-size: 12px;text-align: center; width: inherit;" >
+                                    <p:commandLink >
+                                        <p:graphicImage value="hrManager.jpg" height="90px" width="100px"  />
+                                    </p:commandLink>
+                                    <p:outputLabel value="#{adminBean.company.companyHRManager.firstName} #{adminBean.company.companyHRManager.lastName}"/>
+                                    <!--p:outputLabel value="#{adminBean.compAdmin.lastName}"/-->
+                                    <p:commandLink value="#{adminBean.company.companyHRManager.email}"/>
+                                </p:panelGrid>
+                                <f:facet name="actions">
+                                    <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText title="view detail" value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                    <div class="col-md-6" style="background-color: white; padding: 5px; margin-top: 0px; margin-bottom: auto">
+
+                        <h:form id="infoForm">
+                            <p:growl id="messages" showDetail="true" />
+                            <p:panel header="Company Profile" style="text-align: center; ">
+                                <f:facet name="header" >
+                                    <p:outputLabel value="#{adminBean.company.name}"/>
+                                </f:facet>
+                                <p:panelGrid layout="grid" columns="1">
+                                    <p:row ><p:outputLabel value="Summary"/></p:row>
+                                    <p:row><p:inputTextarea value="#{adminBean.company.summary}"/></p:row>
+                                    <p:row ><p:column ><p:outputLabel value="Sector of Activity:"/></p:column>
+                                        <p:column><p:inputText value="#{adminBean.company.sectorOfActivity}"/></p:column>
+                                    </p:row>
+                                    <p:row><p:column ><p:outputLabel value="Website:"/></p:column>
+                                        <p:column><p:inputText value="#{adminBean.company.website}"/></p:column>
+                                    </p:row>
+                                    <p:row><p:column ><p:outputLabel value="Since:"/></p:column>
+                                        <p:column><p:inputText value="#{adminBean.company.dateOfCreation}"/></p:column>
+                                    </p:row>
+                                    <p:row><p:column ><p:commandLink value="Project Managers:" action="#"/></p:column>
+                                        <p:column><p:outputLabel value="#{adminBean.numOfPM}"/></p:column>
+                                    </p:row>
+                                    <p:row><p:column ><p:commandLink value="Employees:" action="#"/></p:column>
+                                        <p:column><p:outputLabel value="#{adminBean.numOfEMP}"/></p:column>
+                                    </p:row>
+                                    <p:row><p:column ><p:commandLink value="Views:" action="#"/></p:column>
+                                        <p:column><p:outputLabel value="#{adminBean.company.numViews}"/></p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                                <f:facet name="footer" >
+                                    <p:row>
+                                        <p:column>
+                                            <p:commandLink value="Update" action="#{adminBean.doCompanyUpdate()}" 
+                                                           update="infoForm" style="margin-right: 10px">
+                                                <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                                            </p:commandLink>
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                        <p:column><p:commandLink value="Delete" update="infoForm"/></p:column>
+                                    </p:row>
+                                </f:facet>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                    <div class="col-md-3"><style type="text/css">
+                            .ui-sticky {
+                                top: 70px !important;
+                            }
+                            @media (max-width: 960px) {
+                                .ui-sticky {
+                                    top: 110px !important;
+                                }
+                            }
+                        </style>
+                        <h:form id="otherInfoForm">
+                            <p:panel header="Company Profile" toggleable="true" toggleOrientation="horizontal" style="text-align: center;">
+                                <p:panelGrid columns="1" layout="grid" style="font-size: 12px;text-align: center; width: inherit;">
+                                    <p:commandLink action="/views/front/adminEntreprise/compMap?faces-redirect=true">
+                                        <p:graphicImage value="byusforus.png" height="150px" width="120px"  />
+                                    </p:commandLink>
+                                    <f:facet name="header">
+                                        <p:outputLabel value="#{adminBean.company.name}"/>
+                                    </f:facet>
+                                </p:panelGrid>
+                                <f:facet name="actions">
+                                    <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default" action="/views/front/adminEntreprise/compProfileManagement?faces-redirect=true"><h:outputText title="view detail" value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                                <f:facet name="options">
+                                    <p:menu >
+                                        <p:menuitem value="Subscribers" action="/views/front/adminEntreprise/subscribers?faces-redirect=true" icon="pi pi-times"  />
+                                        <p:menuitem value="Events"  action="#{adminBean.viewEvents()}" icon="pi pi-times" ajax="false"/>
+                                        <p:menuitem value="Offers" action="#{adminBean.viewOffers()}" icon="pi pi-times"  />
+                                    </p:menu>
+                                </f:facet>
+                            </p:panel>
+                            <p:sticky target="otherInfoForm" />
+                            <p:sticky target="AdminForm" />
+                            <p:sticky target="HRForm" />
+                            <p:sticky target="infoForm" />
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+        <!-- End download Area -->
+    </ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/templates/template_front.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title"><title>Home</title></ui:define>
+
+    <ui:define name="content">
+        <!-- start banner Area -->
+        <h:head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+            <link rel="stylesheet" href="style.css" />
+            <!--link rel="stylesheet" href="https://fonts.googleapis.com/css"/-->
+            <link rel="canonical" href="http://localhost:8084/piJEE-web-1.0/signUp.xhtml" />
+            <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/-->
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+        </h:head>
+        <h:body style="background : url('backgroud.jpg'); background-color: lightskyblue; font-size: 12px;" id="myBody" >
+            <style type="text/css">
+                .ui-sticky {
+                    top: 70px !important;
+                }
+                @media (max-width: 960px) {
+                    .ui-sticky {
+                        top: 110px !important;
+                    }
+                }
+                <!--for Datascroller Management-->
+                .logo {
+                    width: 5%;
+                }
+
+                .detail {
+                    width: 95%;
+                    padding-left: 2px;
+                }
+
+                .detail td {
+                    font-size: 12px;
+                }
+
+                .ui-datascroller .ui-datascroller-item {
+                    border-bottom: 1px solid #A8A8A8;
+                    padding: 2px 2px;
+                    /* with the exported variables from Nova and Luna Themes*/
+                    border-bottom-color:var(--input-border-color, #A8A8A8);
+                }
+
+                .ui-dataview-list .ui-dataview-row {
+                    border-bottom: 1px solid #A8A8A8;
+                    padding: 25px 10px;
+                    /* with the exported variables from Nova and Luna Themes*/
+                    border-bottom-color: var(--input-border-color, #A8A8A8);
+                }
+            </style>
+            <div class="container" style="background : url('backgroud.jpg'); background-color: #ccccff;">
+                <div class="row" style="background-color: white; padding: 5px; margin-top: 60px; margin-bottom: auto">
+
+                    <div class="col-md-3" >
+
+
+                        <div class="row">
+                            <div class="dropdown">
+                                <h:form>
+                                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton"  aria-haspopup="true" aria-expanded="false">
+                                        <span style="color: red;"><p:outputLabel value="#{adminBean.numberNotifs}"/></span>
+                                        <i class="fa fa-bell"></i>
+                                        <p:selectOneMenu class="btn btn-secondary" id="country" value="" style="width:0px ; background-color: #6c757d">
+                                            <f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
+                                            <f:selectItems value="#{adminBean.notifMessages()}" />
+                                        </p:selectOneMenu>
+                                    </button>
+                                </h:form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h:form id="AdminForm" style="width: 100%">
+                                <p:panel header="Admin" toggleable="true" toggleOrientation="horizontal" style="text-align: center; width: 90%">
+                                    <f:facet name="header" >
+                                        <p:outputLabel value="Candidate" />
+                                    </f:facet> 
+                                    <p:panelGrid columns="1" layout="grid" style="font-size: 12px;text-align: center; width: inherit;" >
+                                        <p:commandLink >
+                                            <p:graphicImage value="elon.png" height="90px" width="100px"  />
+                                        </p:commandLink>
+                                        <p:outputLabel value="#{candidateViewController.connectedCdt.firstName} #{candidateViewController.connectedCdt.lastName}"/>
+
+                                        <p:commandLink value="#{candidateViewController.connectedCdt.email}"/>
+                                    </p:panelGrid>
+                                    <f:facet name="actions">
+                                        <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText title="view detail" value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                    </f:facet>
+                                    <f:facet name="options">
+                                        <p:menu >
+                                            <p:menuitem value="Candidates"  icon="pi pi-clone" action="#{candidateViewController.candidatesList()}" ajax="false"/>
+                                            <p:menuitem value="Profile"  icon="pi pi-times" action="#{candidateViewController.cdtConnected()}" ajax="false"/>
+                                            <p:menuitem value="Job Offers" icon="pi pi-clone" action="#{candidateViewController.jobofferList()}" ajax="false" />
+                                            <p:menuitem value="Companies"  icon="pi pi-times" action="#{companyViewController.listComp()}" ajax="false" />
+                                            <p:menuitem value="Friends"  icon="pi pi-clone" action="#{candidateViewController.friendList()}" ajax="false"/>
+                                            <p:menuitem value="Friend Requests"  icon="pi pi-times" action="#{candidateViewController.friendRequestList()}" ajax="false" />
+
+                                        </p:menu>
+                                    </f:facet>
+                                </p:panel>
+                            </h:form>
+                        </div>
+                        <div class="row">
+                            <h:form id="eventsForm" >
+                                <p:panel header="Job offers you might like"  toggleable="true" toggleOrientation="horizontal" style="text-align: center; height: auto;margin-bottom: auto; display: list-item">
+                                    <!--p:panelGrid -->
+                                    <p:dataScroller value="#{candidateViewController.customJobs()}" var="job" chunkSize="2" >
+
+                                        <p:panelGrid  columns="2"  style ="width: 100%" columnClasses="logo,detail">
+                                            <p:graphicImage value="byusforus.png" style="height: 20px; width: 20px;"/> 
+                                            <p:outputPanel style="width: auto">
+                                                <h:panelGrid columns="2" cellpadding="1">
+                                                    <h:outputText value="Title:" />
+                                                    <h:outputText value="#{job.title}" style="font-weight: bold"/>
+
+                                                    <h:outputText value="Positions:" />
+                                                    <h:outputText value="#{job.peopleNeeded}" style="font-weight: bold"/>
+                                                    <h:outputText value="Status:" />
+                                                    <h:outputText value="#{job.offerStatus}" style="font-weight: bold"/>
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+                                            <f:facet name="footer">
+                                                <p:commandLink value="Preview"  action="#{candidateViewController.doPreviewOffer()}">
+                                                    <f:setPropertyActionListener value="#{job}" target="#{candidateViewController.selectedOffer}" />
+                                                </p:commandLink>
+                                            </f:facet>
+                                        </p:panelGrid>
+
+                                    </p:dataScroller>
+                                    <!--/p:panelGrid-->
+                                    <f:facet name="actions">
+                                        <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                    </f:facet>
+                                </p:panel>
+                            </h:form>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9" style="background-color: white; margin-top: 20px;">
+
+
+                        <div class="row" style="margin-top: 50px">
+
+                            <h:form id="form">
+                                <p:dataView var="cdt" value="#{candidateViewController.candidates}" rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
+                                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                            gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+                                    <p:dataViewListItem>
+                                        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                                            <p:graphicImage value="user.png" height="70px" width="70px" /> 
+
+
+                                            <p:outputPanel>
+                                                <h:panelGrid columns="2" cellpadding="5">
+                                                    <h:outputText value="First name:" />
+                                                    <h:outputText value="#{cdt.firstName}" style="font-weight: bold"/>
+
+                                                    <h:outputText value="Email:" />
+                                                    <h:outputText value="#{cdt.email}" style="font-weight: bold"/>
+
+                                                    <h:outputText value="Recommendations:" />
+                                                    <h:outputText value="#{cdt.recommendations}" style="font-weight: bold"/>
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+
+                                            <h:commandButton value="Details" action="/views/candidate/profileDetails?faces-redirect=true" >
+                                                <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;" />
+                                                <f:setPropertyActionListener value="#{cdt}" target="#{candidateViewController.cdt}" />
+                                                <f:actionListener binding="#{candidateViewController.incrementVisits()}" />
+                                            </h:commandButton>
+
+                                        </h:panelGrid>
+                                    </p:dataViewListItem>
+                                </p:dataView>
+
+                            </h:form>
+                        </div>
+
+                    </div> 
+
+                </div>
+            </div>
+        </h:body>
+        <!-- End download Area -->
+    </ui:define>
+
+
+</ui:composition>
+

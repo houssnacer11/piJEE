@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/templates/template_front.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title"><title>Home</title></ui:define>
+
+    <ui:define name="content">
+        <!-- start banner Area -->
+        <h:head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+            <link rel="stylesheet" href="style.css" />
+            <!--link rel="stylesheet" href="https://fonts.googleapis.com/css"/-->
+            <link rel="canonical" href="http://localhost:8084/piJEE-web-1.0/signUp.xhtml" />
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+        </h:head>
+        <h:body style="background : url('backgroud.jpg'); background-color: lightskyblue;" id="myBody">
+            <div class="container" style="background : url('backgroud.jpg'); background-color: #ccccff;">
+                <div class="row" style="background-color: white; padding: 5px; margin-top: 60px; margin-bottom: 40px">
+                    <div class="col-md-3">
+                        <h:form id="userDetailForm">
+                            <p:panel header="Manage UserINFO Here">
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                                <h:commandButton value="Candidates" action="/views/candidate/candidatesView?faces-redirect=true"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                    <div class="col-md-6" style="background-color: white; padding: 5px; margin-top: 0px; margin-bottom: 1000px">
+                   
+                            <h:form id="postForm">
+                            <p:panel header="Manage Posts Here">
+                                <p:outputLabel value="Manage Posts HERE"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                            </p:panel>
+                        </h:form>
+                            <h:form id="feedsForm">
+                            <p:panel header="Insert Feeds Here">
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                            </p:panel>
+                        </h:form>
+                </div>
+                    <div class="col-md-3">
+                        <h:form id="otherInfoForm">
+                            <p:panel header="Insert Any Info Here">
+                                <p:outputLabel value="Ins"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                                <p:outputLabel value="InsertConnected USER Info"/>
+                            </p:panel>
+                        </h:form>
+                    </div>
+            </div>
+            </div>
+        </h:body>
+        <!-- End download Area -->
+    </ui:define>
+
+
+</ui:composition>

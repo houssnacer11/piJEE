@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/templates/template_signUp.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title"><title>Home</title></ui:define>
+
+    <ui:define name="content">
+        <!-- start banner Area -->
+        <h:head>
+                        <link rel="stylesheet" href="style.css" /> 
+            <!--link rel="stylesheet" href="https://fonts.googleapis.com/css"/-->
+            <link rel="canonical" href="http://localhost:8484/piJEE-web-1.0/signUp.xhtml" />
+            <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
+        </h:head>
+        <h:body style="background : url('backgroud.jpg');" id="myBody">
+            <nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand" href="#"> <img
+                        src="745c75d504f336a83a10e6dcf8db44fa.jpg" width="30" height="30"
+                        class="d-inline-block align-top" alt="" /> ByUsForUs </a>
+                <h:form class="form-inline" >
+                    <p:growl id="msg" showDetail="true" />
+                    <p:inputText class="input" value="#{signUpBean.login}" required="true"/> <p:password class="input"
+                                                                                                         value="#{signUpBean.pass}" style="margin-left : 10px; margin-right: 10px" /> 
+                    <p:commandButton action="#{signUpBean.doLogin()}"
+                                     value="Login" class="btn btn-success" update="@form" />
+
+                    <p:dialog header="2FAuth" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="200">
+                        <h:outputText value="Insert code HERE." style="text-align: center" />
+                        <p:inputText value="#{signUpBean.authToken}" class="form-control"/>
+                        <p:commandButton value="continue" actionListener="#{signUpBean.doFinalizeLogin()}"/>
+                    </p:dialog> 
+                </h:form>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4" style="background-color: white; padding: 25px; margin-top: 40px; margin-bottom: 40px">
+                        <div class="form">
+                            <ul class="tab-group">
+                                <li class="tab active">
+                                    <a href="#new" >Register As Candidate</a>
+                                </li>
+                                <li class="tab">
+                                    <a href="#old">Register As Comp Staff</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="new">
+                                    <h:form id="regForm">
+                                        <p:growl id="messages" showDetail="true" />
+                                        <div class="form-group">
+                                            <p:outputLabel>Username</p:outputLabel> <p:inputText
+                                                value="#{signUpBean.username}" class="form-control" required="true"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <p:outputLabel>Email</p:outputLabel> <p:inputText
+                                                value="#{signUpBean.email}" class="form-control" required="true"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <p:outputLabel>First Name</p:outputLabel> <p:inputText
+                                                value="#{signUpBean.firstName}" class="form-control" required="true" />
+                                        </div>
+                                        <div class="form-group">
+                                            <p:outputLabel>Last Name</p:outputLabel> <p:inputText
+                                                value="#{signUpBean.lastName}" class="form-control" required="true" />
+                                        </div>
+                                        <div class="form-group">
+                                            <p:outputLabel>Password *</p:outputLabel>
+                                            <p:password id="pwd1" value="#{signUpBean.password}" match="pwd2" feedback="true" inline="true"
+                                                        class="form-control" required="true"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <p:outputLabel>Re-Password *</p:outputLabel>
+                                            <p:password id="pwd2" value="#{signUpBean.password}" feedback="true" inline="true" class="form-control" required="true"/>
+                                        </div>
+                                        <p style="text-align: center">
+                                            By Clicking subscribe, You agree to terms and conditions,
+                                            Policy and Confidentiality,And cookies related policy of ByUsForUs.
+                                        </p>
+                                        <p:messages showDetail="true"/>
+                                        <p:captcha label="Captcha" />
+                                        <br />
+                                        <p:commandButton type="submit" value="Subscribe"
+                                                         action="#{signUpBean.SignUpAsCandidate()}" ajax="false" icon="pi pi-check"
+                                                         update="@regForm"
+                                                         class="btn btn-primary btn-block" />
+                                    </h:form>
+                                </div>
+                                <div id="old">
+                                    <h:form id="regFormOld">
+                                        <p:panel id="panel">
+                                            <p:growl id="messagesOld" showDetail="true" />
+
+                                            <p:outputLabel value="Role: " />
+                                            <h:selectOneMenu id="rl" value="#{signUpBean.role}" style="width:200px" >
+                                                <f:selectItem itemLabel="Select Role" />
+                                                <f:selectItems value="#{signUpBean.Roles()}" />
+                                            </h:selectOneMenu>
+                                            <div class="form-group">
+                                                <p:outputLabel>Username</p:outputLabel> <p:inputText
+                                                    value="#{signUpBean.username}" class="form-control" required="true"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel>Email</p:outputLabel> <p:inputText
+                                                    value="#{signUpBean.email}" class="form-control" required="true"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel>First Name</p:outputLabel> <p:inputText
+                                                    value="#{signUpBean.firstName}" class="form-control" required="true" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel>Last Name</p:outputLabel> <p:inputText
+                                                    value="#{signUpBean.lastName}" class="form-control" required="true" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel>Password *</p:outputLabel>
+                                                <p:password id="pwd3" value="#{signUpBean.password}" match="pwd4" feedback="true" inline="true"
+                                                            class="form-control" required="true"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <p:outputLabel>Re-Password *</p:outputLabel>
+                                                <p:password id="pwd4" value="#{signUpBean.password}" feedback="true" inline="true" class="form-control" required="true"/>
+                                            </div>
+
+                                            <p style="text-align: center">
+                                                By Clicking subscribe, You agree to terms and conditions,
+                                                Policy and Confidentiality,And cookies related policy of ByUsForUs.
+                                            </p>
+                                            <p:messages showDetail="true"/>
+                                            <p:captcha label="Captcha" />
+                                            <br />
+                                            <p:commandButton type="submit" value="Subscribe"
+                                                             action="#{signUpBean.SignUpAsCompanyStaff()}" ajax="false" icon="pi pi-check"
+                                                             update="@regFormOld"
+                                                             class="btn btn-primary btn-block" />
+                                        </p:panel> 
+                                    </h:form>
+                                </div>
+                            </div>
+                            <!--  tab-content -->
+                        </div>
+                        <!--  /form -->
+                    </div>
+                    <div class="tab-content"></div>
+                </div>
+                <div class="col-md-4"></div>
+            </div><script
+                src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+            type="text/javascript" xml:space="preserve"></script> <script
+                type="text/javascript" xml:space="preserve">//<![CDATA[
+                                         $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+                                             var $this = $(this),
+                                                     label = $this.prev('label');
+
+                                             if (e.type === 'keyup') {
+                                                 if ($this.val() === '') {
+                                                     label.removeClass('active highlight');
+                                                 } else {
+                                                     label.addClass('active highlight');
+                                                 }
+                                             } else if (e.type === 'blur') {
+                                                 if ($this.val() === '') {
+                                                     label.removeClass('active highlight');
+                                                 } else {
+                                                     label.removeClass('highlight');
+                                                 }
+                                             } else if (e.type === 'focus') {
+
+                                                 if ($this.val() === '') {
+                                                     label.removeClass('highlight');
+                                                 } else if ($this.val() !== '') {
+                                                     label.addClass('highlight');
+                                                 }
+                                             }
+
+                                         });
+
+                                         $('.tab a').on('click', function (e) {
+
+                                             e.preventDefault();
+
+                                             $(this).parent().addClass('active');
+                                             $(this).parent().siblings().removeClass('active');
+
+                                             var target = $(this).attr('href');
+
+                                             $('.tab-content > div').not(target).hide();
+
+                                             $(target).fadeIn(600);
+
+                                         });
+                                         //]]></script>
+        </h:body>
+        <!-- End download Area -->
+    </ui:define>
+
+
+</ui:composition>

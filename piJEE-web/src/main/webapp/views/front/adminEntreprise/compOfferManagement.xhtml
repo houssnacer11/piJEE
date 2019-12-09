@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/templates/template_front.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title"><title>Home</title></ui:define>
+
+    <ui:define name="content">
+        <!-- start banner Area -->
+        <h:head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+            <!--link rel="stylesheet" href="style.css" /-->
+            <!--link rel="stylesheet" href="https://fonts.googleapis.com/css"/-->
+            <link rel="canonical" href="http://localhost:8084/piJEE-web-1.0/signUp.xhtml" />
+            <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/-->
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+        </h:head>
+        <h:body style="background : url('backgroud.jpg'); background-color: lightskyblue; font-size: 12px;" id="myBody" >
+            <style type="text/css">
+                .ui-sticky {
+                    top: 70px !important;
+                }
+                @media (max-width: 960px) {
+                    .ui-sticky {
+                        top: 110px !important;
+                    }
+                }
+                <!--for Datascroller Management-->
+                .logo {
+                    width: 5%;
+                }
+
+                .detail {
+                    width: 95%;
+                    padding-left: 2px;
+                }
+
+                .detail td {
+                    font-size: 12px;
+                }
+
+                .ui-datascroller .ui-datascroller-item {
+                    border-bottom: 1px solid #A8A8A8;
+                    padding: 2px 2px;
+                    /* with the exported variables from Nova and Luna Themes*/
+                    border-bottom-color:var(--input-border-color, #A8A8A8);
+                }
+
+                .ui-dataview-list .ui-dataview-row {
+                    border-bottom: 1px solid #A8A8A8;
+                    padding: 25px 10px;
+                    /* with the exported variables from Nova and Luna Themes*/
+                    border-bottom-color: var(--input-border-color, #A8A8A8);
+                }
+            </style>
+            <div class="container" style=" background-color: #ccccff;">
+                <div class="row" style="background-color: white; padding: 5px; margin-top: 60px; margin-bottom: auto">
+
+
+                    <div class="col-md-3" >
+                        <h:form id="AdminForm">
+                            <p:panel header="Admin" toggleable="true" toggleOrientation="horizontal" style="text-align: center;">
+                                <f:facet name="header" >
+                                    <p:outputLabel value="#{adminBean.userType}" />
+                                </f:facet> 
+                                <p:panelGrid columns="1" layout="grid" style="font-size: 12px;text-align: center; width: inherit;" >
+                                    <p:commandLink >
+                                        <p:graphicImage value="user.png" height="90px" width="100px"  />
+                                    </p:commandLink>
+                                    <p:outputLabel value="#{adminBean.firstName} #{adminBean.lastName}"/>
+                                    <!--p:outputLabel value="#{adminBean.lastName}"/-->
+                                    <p:commandLink value="#{adminBean.email}"/>
+                                </p:panelGrid>
+                                <f:facet name="actions">
+                                    <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText title="view detail" value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                                <f:facet name="options">
+                                    <p:menu >
+                                        <p:menuitem value="Home" action="/views/front/adminEntreprise/home?faces-redirect=true" icon="pi pi-clone"  />
+                                        <p:menuitem value="Profile" action="#{adminBean.profileView()}" icon="pi pi-times"  />
+                                    </p:menu>
+                                </f:facet>
+                            </p:panel>
+                        </h:form>
+                        <h:form id="eventsForm" >
+                            <p:panel header="User Offers"  toggleable="true" toggleOrientation="horizontal" style="text-align: center; height: auto;margin-bottom: auto; display: list-item">
+                                <!--p:panelGrid -->
+                                <p:dataScroller value="#{adminBean.userOffers}" var="off" chunkSize="2" >
+                                    <f:facet  name="header">
+                                        Scroll Down to Load More Offers
+                                    </f:facet>
+                                    <p:panelGrid  columns="2"  style ="width: 100%" columnClasses="logo,detail">
+                                        <p:graphicImage value="byusforus.png" style="height: 20px; width: 20px;"/> 
+                                        <p:outputPanel style="width: auto">
+                                            <h:panelGrid columns="2" cellpadding="1">
+                                                <h:outputText value="Title:" />
+                                                <h:outputText value="#{off.title}" style="font-weight: bold"/>
+
+                                                <h:outputText value="Location:" />
+                                                <h:outputText value="#{off.city}" style="font-weight: bold"/>
+
+                                                <h:outputText value="Company:" />
+                                                <h:outputText value="#{off.company.name}" style="font-weight: bold"/>
+                                            </h:panelGrid>
+                                        </p:outputPanel>
+                                        <f:facet name="footer">
+                                            <p:commandLink value="Preview" action="#{adminBean.doPreviewOffer()}" >
+                                                <f:setPropertyActionListener value="#{off}" target="#{adminBean.selectedOffer}"/>
+                                            </p:commandLink>
+                                        </f:facet>
+                                    </p:panelGrid>
+
+                                </p:dataScroller>
+                                <!--/p:panelGrid-->
+                                <f:facet name="actions">
+                                    <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                    <div class="col-md-9" style="background-color: white; margin-top: 20px;">
+                        <div class="input-group mb-3">
+                            <h:form>
+                                <div class="input-group-prepend">
+                                    
+                                    <p:inputText  value="#{adminBean.searchTitle}" class="form-control" style="width: 200px; margin-right : 5px; border : 2px solid red" placeholder="Title"/>
+                                    <p:inputText value="#{adminBean.searchLocation}" class="form-control" style="width: 200px; margin-right : 5px ;border : 2px solid red;" placeholder="Location"/>
+                                    <!--select class="" name="SelectExpertise" style="padding : 5px; border-radius: 5px; width: 150px; margin-right : 5px;">
+                                        <option value="Junior" style="padding : 5px;" >Junior</option>
+                                        <option value="Senior">Senior</option>
+                                        <option value="Something">Something</option>
+                                    </select-->
+                                    <p:selectOneMenu value="#{adminBean.searchExpertise}" style="padding : 5px; border-radius: 2px; width: 150px; margin-right : 5px;">
+                                        <!--f:selectItem itemLabel="Select Role" itemValue="" noSelectionOption="true" /-->
+                                        <f:selectItems value="#{signUpBean.Levels()}" />
+                                    </p:selectOneMenu>
+                                    <p:commandButton  action="#{adminBean.generalOfferSearch()}" value=" " class="btn btn-primary fa fa-search" style="border-radius: 5px; margin-right : 5px;" >
+
+                                    </p:commandButton>
+                                    <!--Implementing modal class for job offer creation-->
+                                    <button type="button" class="btn btn-success" style="border-radius: 5px" aria-label="Left Align"
+                                            data-toggle="modal" data-target="#exampleModalScrollable">
+                                        <span class="fa fa-plus" aria-hidden="true"></span>
+                                    </button>
+                                    
+                                </div>
+                                </h:form>
+                            <!-- Modal -->
+                                    <h:form id="cForm">
+                                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Create Job Offer</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <p:outputLabel> Title </p:outputLabel>
+                                                            <p:inputText class="form-control" value="#{adminBean.offerTitle}" title="Title" > </p:inputText>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p:outputLabel> Location </p:outputLabel>
+                                                            <p:inputText class="form-control" value="#{adminBean.offerCity}" title="Location" > </p:inputText>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p:outputLabel> People Needed </p:outputLabel>
+                                                            <p:inputNumber class="form-control" value="#{adminBean.offerPeopleNeeded}" title="PeopleNeeded" > </p:inputNumber>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p:outputLabel> Expires On </p:outputLabel>
+                                                            <p:datePicker value="#{adminBean.offerDateOfArchive}" class="form-control" showTime="true" showIcon="true"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <h:selectOneMenu id="Exp" value="#{adminBean.offerExpertiseLevel}" >
+                                                                <f:selectItem itemLabel="Select Expertise Level" />
+                                                                <f:selectItems value="#{signUpBean.Levels()}" />
+                                                            </h:selectOneMenu>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <h:outputLabel for="multiple" value="Select Strings" />
+                                                            <h:panelGrid columns="2" cellpadding="5">
+                                                                <p:selectManyCheckbox id="multiple" value="#{adminBean.selectedSkills}" layout="grid" columns="1">
+                                                                    <f:selectItems value="#{signUpBean.Skills()}" var="theme" itemLabel="#{theme}" itemValue="#{theme}" />
+                                                                </p:selectManyCheckbox>
+                                                            </h:panelGrid>
+                                                        </div>                                       
+
+                                                        <div class="form-group">
+                                                            <p:outputLabel> Description </p:outputLabel>
+                                                            <p:inputTextarea value="#{adminBean.offerDescription}" title="Description" class="form-control"></p:inputTextarea>
+                                                        </div>
+
+
+                                                    </div> 
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <p:commandButton  class="btn btn-primary" title="Create" action="#{adminBean.doCreateJobOffer()}"></p:commandButton>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                    <!--End of Modal class implementation-->
+                        </div>
+
+                        <div class="row" style="margin-top: 50px">
+                            <h:form id="form">
+                                <p:dataView id="tbl" var="job" value="#{adminBean.offers}" rows="8" paginator="true" rowsPerPageTemplate="2,4,8"
+                                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                            gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+                                    
+                                    <p:dataViewGridItem>
+                                        <p:panel header="#{job.title}" style="text-align:center">
+                                            <h:panelGrid columns="1" style="width:100%">
+                                                <p:graphicImage value="byusforus.png" /> 
+
+                                                <h:outputText value="#{adminBean.company.name}" />
+
+                                                <p:commandLink update=":form" title="View Detail" action="#{adminBean.doPreviewOffer()}">
+                                                    <h:outputText styleClass="fa fa-search" style="margin:0 auto;" />
+                                                    <f:setPropertyActionListener value="#{job}" target="#{adminBean.selectedOffer}" />
+                                                </p:commandLink>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:dataViewGridItem>
+
+                                    <p:dataViewListItem>
+                                        <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                                            <p:graphicImage value="byusforus.png" /> 
+
+                                            <p:outputPanel>
+                                                <h:panelGrid columns="2" cellpadding="5">
+                                                    <h:outputText value="Title:" />
+                                                    <h:outputText value="#{job.title}" style="font-weight: bold"/>
+
+                                                    <h:outputText value="CreatedOn:" />
+                                                    <h:outputText value="#{job.dateOfCreation}" style="font-weight: bold"/>
+
+                                                    <h:outputText value="Status:" />
+                                                    <h:outputText value="#{job.offerStatus}" style="font-weight: bold"/>
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+
+                                            <p:commandLink update=":form" title="View Detail" action="#{adminBean.doPreviewOffer()}">
+                                                <h:outputText styleClass="fa fa-search" style="margin:0 auto;" />
+                                                <f:setPropertyActionListener value="#{job}" target="#{adminBean.selectedOffer}" />
+                                            </p:commandLink>
+                                        </h:panelGrid>
+                                    </p:dataViewListItem>
+                                </p:dataView>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+        <!-- End download Area -->
+    </ui:define>
+
+
+</ui:composition>

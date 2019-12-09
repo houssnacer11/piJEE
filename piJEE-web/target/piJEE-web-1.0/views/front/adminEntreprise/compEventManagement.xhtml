@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/templates/template_front.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title"><title>Home</title></ui:define>
+
+    <ui:define name="content">
+        <!-- start banner Area -->
+        <h:head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+            <!--link rel="stylesheet" href="style.css" /-->
+            <!--link rel="stylesheet" href="https://fonts.googleapis.com/css"/-->
+            <link rel="canonical" href="http://localhost:8084/piJEE-web-1.0/signUp.xhtml" />
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+        </h:head>
+        <h:body style="background-color: lightskyblue; font-size: 12px;" id="myBody" >
+            <style type="text/css">
+                .ui-sticky {
+                    top: 70px !important;
+                }
+                @media (max-width: 960px) {
+                    .ui-sticky {
+                        top: 110px !important;
+                    }
+                }
+                <!--for Datascroller Management-->
+                .logo {
+                    width: 5%;
+                }
+
+                .detail {
+                    width: 95%;
+                    padding-left: 2px;
+                }
+
+                .detail td {
+                    font-size: 12px;
+                }
+
+                .ui-datascroller .ui-datascroller-item {
+                    border-bottom: 1px solid #A8A8A8;
+                    padding: 2px 2px;
+                    /* with the exported variables from Nova and Luna Themes*/
+                    border-bottom-color:var(--input-border-color, #A8A8A8);
+                }
+
+                .ui-dataview-list .ui-dataview-row {
+                    border-bottom: 1px solid #A8A8A8;
+                    padding: 2px 2px;
+                    /* with the exported variables from Nova and Luna Themes*/
+                    border-bottom-color:var(--input-border-color, #A8A8A8);
+                }
+            </style>
+            <div class="container" style=" background-color: #ccccff;">
+                <div class="row" style="background-color: white; padding: 5px; margin-top: 60px; margin-bottom: auto">
+                    
+  
+                    <div class="col-md-3" >
+                        <h:form id="AdminForm">
+                            <p:panel header="Admin" toggleable="true" toggleOrientation="horizontal" style="text-align: center;">
+                                <f:facet name="header" >
+                                    <p:outputLabel value="#{adminBean.userType}" />
+                                </f:facet> 
+                                <p:panelGrid columns="1" layout="grid" style="font-size: 12px;text-align: center; width: inherit;" >
+                                    <p:commandLink >
+                                        <p:graphicImage value="user.png" height="90px" width="100px"  />
+                                    </p:commandLink>
+                                    <p:outputLabel value="#{adminBean.firstName} #{adminBean.lastName}"/>
+                                    <!--p:outputLabel value="#{adminBean.lastName}"/-->
+                                    <p:commandLink value="#{adminBean.email}"/>
+                                </p:panelGrid>
+                                <f:facet name="actions">
+                                    <h:commandLink action="#{adminBean.profileView()}" styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText title="view detail" value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                                <f:facet name="options">
+                                    <p:menu >
+                                        <p:menuitem value="Home" action="/views/front/adminEntrepise/home?faces-redirect=true" icon="pi pi-times"  />
+                                        <p:menuitem value="Profile" action="#{adminBean.profileView()}" icon="pi pi-times"  />
+                                    </p:menu>
+                                </f:facet>
+                            </p:panel>
+                        </h:form>
+                        <h:form id="eventsForm" >
+                            <p:panel header="Events"  toggleable="true" toggleOrientation="horizontal" style="text-align: center; height: auto;margin-bottom: auto; display: list-item">
+                                <!--p:panelGrid -->
+                                <p:dataScroller value="#{adminBean.events}" var="evt" chunkSize="2" >
+                                    <f:facet  name="header">
+                                        Scroll Down to Load More Events
+                                    </f:facet>
+                                    <p:panelGrid  columns="2"  style ="width: 100%" columnClasses="logo,detail">
+                                        <p:graphicImage value="byusforus.png" style="height: 20px; width: 20px;"/> 
+                                        <p:outputPanel style="width: auto">
+                                            <h:panelGrid columns="2" cellpadding="1">
+                                                <h:outputText value="Title:" />
+                                                <h:outputText value="#{evt.name}" style="font-weight: bold"/>
+
+                                                <h:outputText value="Start:" />
+                                                <h:outputText value="#{evt.startDate}" style="font-weight: bold"/>
+
+                                                <h:outputText value="End:" />
+                                                <h:outputText value="#{evt.endDate}" style="font-weight: bold"/>
+                                            </h:panelGrid>
+                                        </p:outputPanel>
+                                        <f:facet name="footer">
+                                            <p:commandLink value="Preview" action="#{adminBean.doPreviewEvent(evt.id)}"/>
+                                        </f:facet>
+                                    </p:panelGrid>
+
+                                </p:dataScroller>
+                                <!--/p:panelGrid-->
+                                <f:facet name="actions">
+                                    <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                    <div class="col-md-6" style="background-color: white; padding: 5px; margin-top: 0px; margin-bottom: auto">
+
+                        <h:form id="infoForm">
+                            <p:growl id="msg" showDetail="true" />
+                            <p:panel header="OTHER"   style="text-align: center;" id="infoPanel">
+                                <f:facet name="header" >
+                                    <p:outputLabel value="#{adminBean.eventName}"/>
+                                </f:facet>
+                                <p:panelGrid columns="2"  style ="width: 100%" columnClasses="logo,detail" id="infoPanelGrid1">
+                                    <p:graphicImage value="byusforus.png" style="height: 20px; width: 20px;"/> 
+                                    <p:outputPanel style="width: auto">
+                                        <h:panelGrid columns="2" cellpadding="1" id="infoPanelGrid2">
+                                            <h:outputText value="Title:" />
+                                            <h:inputText value="#{adminBean.eventName}" style="font-weight: bold"/>
+
+                                            <h:outputText value="Location:" />
+                                            <h:inputText value="#{adminBean.eventLocation}" style="font-weight: bold"/>
+
+                                            <h:outputText value="Start:" />
+                                            <p:datePicker id="Stime" value="#{adminBean.eventStartDate}" style="font-weight: bold" showTime="true" showIcon=""/>
+
+                                            <h:outputText value="End:" />
+                                            <p:datePicker id="Etime" value="#{adminBean.eventEndDate}" style="font-weight: bold" showTime="true" showIcon="true"/>
+
+                                            <h:outputText value="Description:" />
+                                            <p:inputTextarea value="#{adminBean.eventDescription}" style="font-weight: bold"/>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+                                    <f:facet name="footer">
+                                        <p:commandLink value="Update" update="infoForm" action="#{adminBean.doUpdateEvent()}" style="margin-right: 10px">
+                                            <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                                        </p:commandLink>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                        </p:confirmDialog>
+                                        <p:commandLink value="Delete" update="infoForm" action="#{adminBean.doDeleteEvent()}" style="margin-right: 10px">
+                                            <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                                        </p:commandLink>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                        </p:confirmDialog>
+                                        <p:commandLink value="Create" update="infoForm" action="#{adminBean.doCreateEvent()}" style="margin-right: 10px">
+                                            <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                                        </p:commandLink>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                        </p:confirmDialog>
+                                    </f:facet>
+                                </p:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                    <div class="col-md-3">
+                        <h:form id="otherInfoForm">
+                            <p:growl id="growlMsg" showDetail="true" />
+                            <p:panel header="Company Profile" toggleable="true" toggleOrientation="horizontal" style="text-align: center;">
+                                <p:panelGrid columns="1" layout="grid" style="font-size: 12px;text-align: center; width: inherit;">
+                                    <p:commandLink action="/views/front/adminEntreprise/compMap?faces-redirect=true">
+                                        <p:graphicImage value="byusforus.png" height="150px" width="120px"  />
+                                    </p:commandLink>
+                                    <f:facet name="header">
+                                        <p:outputLabel value="#{adminBean.company.name}"/>
+                                    </f:facet>
+                                </p:panelGrid>
+                                <f:facet name="actions">
+                                    <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default" action="/views/front/adminEntreprise/compProfileManagement?faces-redirect=true"><h:outputText value="?" styleClass="ui-icon pi pi-star" /></h:commandLink>
+                                </f:facet>
+                                <f:facet name="options">
+                                    <p:menu >
+                                        <p:menuitem update="otherInfoForm" value="Profile" action="#{adminBean.compProfileView()}" icon="pi pi-times"  />
+                                        <p:menuitem update="otherInfoForm" value="Offers" action="#{adminBean.viewOffers()}" icon="pi pi-clone"  />
+                                        
+                                    </p:menu>
+                                </f:facet>
+                            </p:panel>
+                            <p:sticky target="otherInfoForm" />
+                            <!--p:sticky target="panel" /-->
+                            <p:sticky target="infoForm" />
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+        <!-- End download Area -->
+    </ui:define>
+
+   
+</ui:composition>

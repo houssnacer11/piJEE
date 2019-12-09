@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CandidateCreateDlg" widgetVar="CandidateCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCandidateTitle}">
+            <h:form id="CandidateCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{candidateController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_introduction}" for="introduction" />
+                        <p:inputText id="introduction" value="#{candidateController.selected.introduction}" title="#{bundle.CreateCandidateTitle_introduction}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_recommendations}" for="recommendations" />
+                        <p:inputText id="recommendations" value="#{candidateController.selected.recommendations}" title="#{bundle.CreateCandidateTitle_recommendations}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_activities}" for="activities" />
+                        <p:inputText id="activities" value="#{candidateController.selected.activities}" title="#{bundle.CreateCandidateTitle_activities}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_curriculumVitaes}" for="curriculumVitaes" />
+                        <p:inputText id="curriculumVitaes" value="#{candidateController.selected.curriculumVitaes}" title="#{bundle.CreateCandidateTitle_curriculumVitaes}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_skills}" for="skills" />
+                        <p:inputText id="skills" value="#{candidateController.selected.skills}" title="#{bundle.CreateCandidateTitle_skills}" required="true" requiredMessage="#{bundle.CreateCandidateRequiredMessage_skills}"/>
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_visits}" for="visits" />
+                        <p:inputText id="visits" value="#{candidateController.selected.visits}" title="#{bundle.CreateCandidateTitle_visits}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_recommendedIdList}" for="recommendedIdList" />
+                        <p:inputText id="recommendedIdList" value="#{candidateController.selected.recommendedIdList}" title="#{bundle.CreateCandidateTitle_recommendedIdList}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_experiences}" for="experiences" />
+                        <p:inputText id="experiences" value="#{candidateController.selected.experiences}" title="#{bundle.CreateCandidateTitle_experiences}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_certificates}" for="certificates" />
+                        <p:inputText id="certificates" value="#{candidateController.selected.certificates}" title="#{bundle.CreateCandidateTitle_certificates}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_cursus}" for="cursus" />
+                        <p:inputText id="cursus" value="#{candidateController.selected.cursus}" title="#{bundle.CreateCandidateTitle_cursus}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_image}" for="image" />
+                        <p:inputText id="image" value="#{candidateController.selected.image}" title="#{bundle.CreateCandidateTitle_image}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{candidateController.selected.email}" title="#{bundle.CreateCandidateTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{candidateController.selected.username}" title="#{bundle.CreateCandidateTitle_username}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_firstName}" for="firstName" />
+                        <p:inputText id="firstName" value="#{candidateController.selected.firstName}" title="#{bundle.CreateCandidateTitle_firstName}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_lastName}" for="lastName" />
+                        <p:inputText id="lastName" value="#{candidateController.selected.lastName}" title="#{bundle.CreateCandidateTitle_lastName}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{candidateController.selected.id}" title="#{bundle.CreateCandidateTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_salt}" for="salt" />
+                        <p:inputText id="salt" value="#{candidateController.selected.salt}" title="#{bundle.CreateCandidateTitle_salt}" />
+                        <p:outputLabel value="#{bundle.CreateCandidateLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{candidateController.selected.password}" title="#{bundle.CreateCandidateTitle_password}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{candidateController.create}" value="#{bundle.Save}" update="display,:CandidateListForm:datalist,:growl" oncomplete="handleSubmit(args,'CandidateCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CandidateCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

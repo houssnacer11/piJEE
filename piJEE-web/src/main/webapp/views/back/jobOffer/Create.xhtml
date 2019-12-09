@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JobOfferCreateDlg" widgetVar="JobOfferCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateJobOfferTitle}">
+            <h:form id="JobOfferCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{jobOfferController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{jobOfferController.selected.title}" title="#{bundle.CreateJobOfferTitle_title}" required="true" requiredMessage="#{bundle.CreateJobOfferRequiredMessage_title}"/>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_dateOfCreation}" for="dateOfCreation" />
+                        <p:calendar id="dateOfCreation" pattern="MM/dd/yyyy" value="#{jobOfferController.selected.dateOfCreation}" title="#{bundle.EditJobOfferTitle_dateOfCreation}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{jobOfferController.selected.description}" title="#{bundle.CreateJobOfferTitle_description}" required="true" requiredMessage="#{bundle.CreateJobOfferRequiredMessage_description}"/>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_city}" for="city" />
+                        <p:inputText id="city" value="#{jobOfferController.selected.city}" title="#{bundle.CreateJobOfferTitle_city}" />
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_offerStatus}" for="offerStatus" />
+                        <p:inputText id="offerStatus" value="#{jobOfferController.selected.offerStatus}" title="#{bundle.CreateJobOfferTitle_offerStatus}" />
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_dateOfArchive}" for="dateOfArchive" />
+                        <p:calendar id="dateOfArchive" pattern="MM/dd/yyyy" value="#{jobOfferController.selected.dateOfArchive}" title="#{bundle.EditJobOfferTitle_dateOfArchive}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_expertiseLevel}" for="expertiseLevel" />
+                        <h:selectOneMenu
+                            value="#{jobOfferController.selected.expertiseLevel}">
+                            <f:selectItem id="expertiseLevel" itemValue="" />
+                            <f:selectItems value="#{enums.expertiseLevels}" />
+                        </h:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_skills}" for="skills" />
+                        <h:selectManyListbox
+                            value="#{jobOfferController.selected.skills}">
+                            <f:selectItem id="skills" itemValue="" />
+                            <f:selectItems value="#{enums.skills}" />
+                        </h:selectManyListbox>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_peopleNeeded}" for="peopleNeeded" />
+                        <p:inputText id="peopleNeeded" value="#{jobOfferController.selected.peopleNeeded}" title="#{bundle.CreateJobOfferTitle_peopleNeeded}" required="true" requiredMessage="#{bundle.CreateJobOfferRequiredMessage_peopleNeeded}"/>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_company}" for="company" />
+                        <p:selectOneMenu id="company" value="#{jobOfferController.selected.company}" >
+                            <f:selectItems value="#{companyProfileController.itemsAvailableSelectOne}"
+                                           var="companyItem"
+                                           itemValue="#{companyItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_hRManager}" for="hRManager" />
+                        <p:selectOneMenu id="hRManager" value="#{jobOfferController.selected.hRManager}" >
+                            <f:selectItems value="#{hRManagerController.itemsAvailableSelectOne}"
+                                           var="hRManagerItem"
+                                           itemValue="#{hRManagerItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateJobOfferLabel_pManager}" for="pManager" />
+                        <p:selectOneMenu id="pManager" value="#{jobOfferController.selected.pManager}" >
+                            <f:selectItems value="#{projectManagerController.itemsAvailableSelectOne}"
+                                           var="pManagerItem"
+                                           itemValue="#{pManagerItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{jobOfferController.create}" value="#{bundle.Save}" update="display,:JobOfferListForm:datalist,:growl" oncomplete="handleSubmit(args,'JobOfferCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="JobOfferCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

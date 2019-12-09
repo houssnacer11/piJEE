@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+
+        <p:dialog id="CandidateApplicationViewDlg" widgetVar="CandidateApplicationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCandidateApplicationTitle}">
+            <h:form id="CandidateApplicationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{candidateApplicationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCandidateApplicationLabel_additionalInfo}"/>
+                        <h:outputText value="#{candidateApplicationController.selected.additionalInfo}" title="#{bundle.ViewCandidateApplicationTitle_additionalInfo}"/>
+                        <h:outputText value="#{bundle.ViewCandidateApplicationLabel_motivationLetter}"/>
+                        <h:outputText value="#{candidateApplicationController.selected.motivationLetter}" title="#{bundle.ViewCandidateApplicationTitle_motivationLetter}"/>
+                        <h:outputText value="#{bundle.ViewCandidateApplicationLabel_jobApplicationState}"/>
+                        <h:outputText value="#{candidateApplicationController.selected.jobApplicationState}" title="#{bundle.ViewCandidateApplicationTitle_jobApplicationState}"/>
+                        <h:outputText value="#{bundle.ViewCandidateApplicationLabel_jobOffer}"/>
+                        <h:outputText value="#{candidateApplicationController.selected.jobOffer.title}" title="#{bundle.ViewCandidateApplicationTitle_jobOffer}"/>
+                        <h:outputText value="#{bundle.ViewCandidateApplicationLabel_candidate}"/>
+                        <h:outputText value="#{candidateApplicationController.selected.candidate.firstName}" title="#{bundle.ViewCandidateApplicationTitle_candidate}"/>
+                        <h:outputText value="RESUME" title="#{bundle.ViewCandidateApplicationTitle_candidate}"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View} Resume" update=":CandidateApplicationViewForm" oncomplete="PF('CandidateApplicationViewResumeDialog').show()" disabled="#{empty candidateApplicationController.selected}"/>
+                        <h:outputText value="Skills Score:"/>
+                        <h:outputText value="This candidate has #{candidateApplicationController.getSkillsFromResume(candidateApplicationController.selected).size()} out of the #{candidateApplicationController.selected.jobOffer.skills.size()} required skills" title=""/>
+                        <h:outputText value="Ranking:"/>
+                        <h:outputText value="This candidate ranks as number #{candidateApplicationController.getCandidateRanking()} out of #{candidateApplicationController.numberOfCandidacies()}" title=""/>
+                    </p:panelGrid>
+                    <p:commandButton value="Invite to take quiz" action="#{candidateApplicationController.inviteToTakeQuiz()}"/>
+                    <p:commandButton value="Reject candidacy" action="#{candidateApplicationController.rejectCandidacy()}"/>
+                    <br></br>
+                    <p:commandButton value="#{bundle.Close}" onclick="CandidateApplicationViewDialog.hide()"/>
+                </h:panelGroup>
+                <p:inputText alt="resumeFileName" style="display:none;" value="#{candidateApplicationController.selected.resume}"  />
+            </h:form>
+        </p:dialog> 
+        <ui:include src="View_Resume.xhtml"/>
+        <script type="text/javascript">
+            var url = 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf';
+            var resumeFileName = $("input[alt='resumeFileName']").val();
+            var url = "../../../" + resumeFileName;
+            var pdfjsLib = window['pdfjs-dist/build/pdf'];
+            
+            pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+            
+            var loadingTask = pdfjsLib.getDocument(url);
+            loadingTask.promise.then(function (pdf) {
+                console.log('PDF loaded');
+                
+                // Fetch the first page
+                var pageNumber = 1;
+                pdf.getPage(pageNumber).then(function (page) {
+                    console.log('Page loaded');
+                    
+                    var scale = 1.5;
+                    var viewport = page.getViewport({scale: scale});
+                    
+                    // Prepare canvas using PDF page dimensions
+                    var canvas = document.getElementById('the-canvas');
+                    var context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    
+                    // Render PDF page into canvas context
+                    var renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    var renderTask = page.render(renderContext);
+                    renderTask.promise.then(function () {
+                        console.log('Page rendered');
+                    });
+                });
+            }, function (reason) {
+                // PDF loading error
+                console.error(reason);
+            });
+        </script>
+    </ui:composition>
+</html>

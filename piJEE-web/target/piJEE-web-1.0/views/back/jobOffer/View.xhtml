@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JobOfferViewDlg" widgetVar="JobOfferViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewJobOfferTitle}">
+            <h:form id="JobOfferViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{jobOfferController.selected != null}">
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_id}"/>
+                        <h:outputText value="#{jobOfferController.selected.id}" title="#{bundle.ViewJobOfferTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_title}"/>
+                        <h:outputText value="#{jobOfferController.selected.title}" title="#{bundle.ViewJobOfferTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_dateOfCreation}"/>
+                        <h:outputText value="#{jobOfferController.selected.dateOfCreation}" title="#{bundle.ViewJobOfferTitle_dateOfCreation}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_description}"/>
+                        <h:outputText value="#{jobOfferController.selected.description}" title="#{bundle.ViewJobOfferTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_city}"/>
+                        <h:outputText value="#{jobOfferController.selected.city}" title="#{bundle.ViewJobOfferTitle_city}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_offerStatus}"/>
+                        <h:outputText value="#{jobOfferController.selected.offerStatus}" title="#{bundle.ViewJobOfferTitle_offerStatus}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_dateOfArchive}"/>
+                        <h:outputText value="#{jobOfferController.selected.dateOfArchive}" title="#{bundle.ViewJobOfferTitle_dateOfArchive}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_expertiseLevel}"/>
+                        <h:outputText value="#{jobOfferController.selected.expertiseLevel}" title="#{bundle.ViewJobOfferTitle_expertiseLevel}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_skills}"/>
+                        <h:outputText value="#{jobOfferController.selected.skills}" title="#{bundle.ViewJobOfferTitle_skills}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_peopleNeeded}"/>
+                        <h:outputText value="#{jobOfferController.selected.peopleNeeded}" title="#{bundle.ViewJobOfferTitle_peopleNeeded}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_company}"/>
+                        <h:outputText value="#{jobOfferController.selected.company}" title="#{bundle.ViewJobOfferTitle_company}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_hRManager}"/>
+                        <h:outputText value="#{jobOfferController.selected.hRManager}" title="#{bundle.ViewJobOfferTitle_hRManager}"/>
+                        <h:outputText value="#{bundle.ViewJobOfferLabel_pManager}"/>
+                        <h:outputText value="#{jobOfferController.selected.pManager}" title="#{bundle.ViewJobOfferTitle_pManager}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="JobOfferViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

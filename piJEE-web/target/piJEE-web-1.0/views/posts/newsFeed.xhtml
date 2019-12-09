@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{postingModel.checkAuth()}" />
+</f:metadata>
+    </h:head>
+    <h:body>
+        <div>
+            <h:form>
+                <b:navBar brand="ByUsForUs" brandHref="#" fluid="true" position="top" sticky="true">
+                    <b:navbarLinks>
+                        <b:navCommandLink value="Profile" action="#{candidateViewController.cdtConnected()}">
+
+                        </b:navCommandLink>
+
+                        <b:navLink value="News feed" href="/webapp/views/posts/newsFeed.xhtml"></b:navLink>
+                    </b:navbarLinks>
+
+                    <!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
+                    <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+                    <b:navbarLinks pull="right" styleClass="hidden-xs">
+                        <b:navLink value="Link" href="#"></b:navLink>
+                        <b:dropMenu value="Dropdown">
+                            <b:navLink value="Action" href="#"></b:navLink>
+                            <b:navLink value="Another action" href="#"></b:navLink>
+                            <b:navLink value="Something else here" href="#"></b:navLink>
+                            <b:navLink></b:navLink>
+                            <b:navLink header="Nav header"></b:navLink>
+                            <b:navLink value="Separated link" href="#"></b:navLink>
+                            <b:navLink value="One more separated link" href="#"></b:navLink>
+                        </b:dropMenu>
+                    </b:navbarLinks>
+                </b:navBar>
+            </h:form>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <b:container style = "width: 50%">
+
+            <f:view>
+                <b:row>
+                    <h:form enctype="multipart/form-data">
+
+                        <p:growl id="msg"></p:growl>
+
+                        <p:fileUpload mode="advanced" value="#{postingModel.uploadedFile}"
+                                      auto="true"
+                                      allowTypes="/(\.|\/)(mp4|png|jpg|jpeg)$/"
+                                      fileUploadListener="#{postingModel.upload}"
+                                      update="msg">
+                        </p:fileUpload>
+                        <!-- <p:commandButton value="Add picture/video" action="{postingModel.upload}" ajax="false" class="btn btn-outline-primary" /> -->
+                    </h:form>
+                </b:row>
+
+                <b:row>
+                    <h:form>
+                        <b:column>
+                            <p:inputTextarea value="#{postingModel.post.text}" rows="5"
+                                             cols="30" 
+                                             counter="display" 
+                                             maxlength="150" 
+                                             counterTemplate="{0} characters remaining." 
+                                             autoResize="false"
+                                             placeholder="What's in your mind?"/>
+
+                        </b:column>
+                        <b:column>
+                            <h:commandButton action="#{postingModel.createPost()}" value="Post"  class="btn btn-primary" />
+                        </b:column>
+                        <b:column>
+                            <h:outputText id="display" />
+                        </b:column>
+                    </h:form>
+
+                </b:row>
+
+            </f:view>
+        </b:container>
+        <div>
+            <b:container style="width: 50%">
+
+                <ui:repeat value="#{postingModel.getPosts()}" var="post">
+
+                    <b:panel title="#{post.by.firstName} #{post.by.lastName} - #{post.created}" look="primary">
+                        <b:row>
+                            <b:column medium-screen="12">
+                                <pre>#{post.text}</pre>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+                            <b:column medium-screen="12">
+                                <b:video 
+                                    style="width:100%"
+                                    src="#{post.filePath}"
+                                    rendered="#{post.filePath != null and post.fileType.contains('mp4')}">
+                                </b:video>
+                                <b:image 
+                                    style="width:100%"
+                                    value="#{post.filePath}"
+                                    rendered="#{post.filePath != null and not post.fileType.contains('mp4')}"/>
+                            </b:column>
+                        </b:row>
+                    </b:panel>
+                    <br/>
+
+                </ui:repeat>
+            </b:container>
+        </div>
+    </h:body>
+</ui:composition>

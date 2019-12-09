@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <ui:insert name="title"></ui:insert>
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <!-- Favicon-->
+        <link rel="shortcut icon" href="img/fav.png"/>
+        <!-- Author Meta -->
+        <meta name="author" content="codepixer"></meta>
+        <!-- Meta Description -->
+        <meta name="description" content=""></meta>
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="/"></meta>
+        <!-- meta character set -->
+        <meta charset="UTF-8"></meta>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"/>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+        <!--
+        CSS
+        ============================================= -->
+        <h:outputStylesheet name="css/linearicons.css"/>
+        <!--h:outputStylesheet name="css/font-awesome.min.css"/-->
+        <h:outputStylesheet name="css/bootstrap.css"/>
+        <h:outputStylesheet name="css/magnific-popup.css"/>
+        <h:outputStylesheet name="css/animate.min.css"/>
+        <h:outputStylesheet name="css/owl.carousel.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+    </h:head>
+    <h:body>
+        <ui:include src="../../views/header.xhtml"></ui:include>
+        <ui:insert name="content"></ui:insert>
+        <ui:include src="../../views/footer.xhtml"></ui:include>
+    </h:body>
+</html>
+
