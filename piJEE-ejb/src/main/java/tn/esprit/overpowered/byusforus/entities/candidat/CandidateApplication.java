@@ -25,7 +25,6 @@ import tn.esprit.overpowered.byusforus.util.JobApplicationState;
 
 /**
  *
- * @author Yassine
  */
 @Entity
 public class CandidateApplication implements Serializable {

@@ -13,7 +13,6 @@ import javax.persistence.Id;
 
 /**
  *
- * @author pc
  */
 @Entity
 public class Notif implements Serializable {

@@ -17,7 +17,6 @@ import tn.esprit.overpowered.byusforus.entities.users.User;
 
 /**
  *
- * @author EliteBook
  */
 @Entity
 public class Session implements Serializable {

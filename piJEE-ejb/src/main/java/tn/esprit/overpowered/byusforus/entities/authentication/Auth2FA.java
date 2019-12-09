@@ -15,7 +15,6 @@ import tn.esprit.overpowered.byusforus.entities.users.User;
 
 /**
  *
- * @author aminos
  */
 @Entity
 public class Auth2FA implements Serializable {

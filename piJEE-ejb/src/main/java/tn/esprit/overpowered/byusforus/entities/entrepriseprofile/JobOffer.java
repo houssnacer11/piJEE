@@ -37,7 +37,7 @@ import tn.esprit.overpowered.byusforus.entities.util.Skill;
 
 /**
  *
- * @author pc
+
  */
 @Entity
 public class JobOffer implements Serializable {

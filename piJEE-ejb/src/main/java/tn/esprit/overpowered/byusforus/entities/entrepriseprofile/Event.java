@@ -24,7 +24,6 @@ import tn.esprit.overpowered.byusforus.entities.users.CompanyProfile;
 
 /**
  *
- * @author pc
  */
 @Entity
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE)

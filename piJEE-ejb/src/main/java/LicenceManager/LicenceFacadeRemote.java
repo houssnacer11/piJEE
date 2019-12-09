@@ -11,7 +11,6 @@ import javax.ejb.Remote;
 
 /**
  *
- * @author EliteBook
  */
 @Remote
 public interface LicenceFacadeRemote {
