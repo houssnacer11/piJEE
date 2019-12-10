@@ -16,7 +16,6 @@ import tn.esprit.overpowered.byusforus.entities.util.Skill;
 
 /**
  *
- * @author Yassine
  */
 @ManagedBean
 @javax.faces.bean.SessionScoped

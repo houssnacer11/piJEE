@@ -38,7 +38,6 @@ import util.authentication.Authenticator;
 
 /**
  *
- * @author pc
  */
 @ManagedBean(name = "signUpBean")
 @SessionScoped

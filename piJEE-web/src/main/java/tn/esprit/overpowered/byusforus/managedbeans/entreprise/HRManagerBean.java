@@ -11,8 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 /**
- *
- * @author pc
  */
 @ManagedBean(name = "hRManagerBean")
 @SessionScoped

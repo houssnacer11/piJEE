@@ -50,7 +50,6 @@ import util.authentication.Authenticator;
 
 /**
  *
- * @author pc
  */
 @ManagedBean(name = "adminBean")
 @SessionScoped

@@ -23,7 +23,6 @@ import util.authentication.Authenticator;
 
 /**
  *
- * @author EliteBook
  */
 @ManagedBean
 @SessionScoped

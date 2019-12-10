@@ -15,7 +15,6 @@ import tn.esprit.overpowered.byusforus.services.entrepriseprofile.JobOfferFacade
 
 /**
  *
- * @author EliteBook
  */
 @ManagedBean
 @SessionScoped

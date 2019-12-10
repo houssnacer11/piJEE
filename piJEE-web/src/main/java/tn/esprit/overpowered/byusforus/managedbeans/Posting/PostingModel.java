@@ -33,7 +33,6 @@ import util.authentication.Authenticator;
 
 /**
  *
- * @author aminos
  */
 @ManagedBean(name = "postingModel")
 @SessionScoped

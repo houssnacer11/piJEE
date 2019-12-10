@@ -14,7 +14,6 @@ import javax.faces.model.SelectItem;
 
 /**
  *
- * @author EliteBook
  */
 @ManagedBean  
 @ViewScoped  

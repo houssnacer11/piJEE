@@ -15,7 +15,6 @@ import tn.esprit.overpowered.byusforus.services.users.CompanyProfileFacadeLocal;
 
 /**
  *
- * @author EliteBook
  */
 @ManagedBean
 @SessionScoped
