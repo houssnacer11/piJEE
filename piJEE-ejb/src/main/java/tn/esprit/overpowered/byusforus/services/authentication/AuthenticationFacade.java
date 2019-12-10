@@ -100,7 +100,7 @@ public class AuthenticationFacade implements AuthenticationFacadeRemote {
 
             } catch (MessagingException ex) {
                 Logger.getAnonymousLogger().info("Erreur");
-                //Logger.getLogger(AuthenticationFacade.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AuthenticationFacade.class.getName()).log(Level.SEVERE, null, ex);
                 
             }
             
