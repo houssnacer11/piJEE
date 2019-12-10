@@ -12,7 +12,6 @@ import tn.esprit.overpowered.byusforus.util.JobApplicationState;
 
 /**
  *
- * @author Yassine
  */
 @Local
 public interface CandidateApplicationFacadeLocal {

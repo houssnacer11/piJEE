@@ -10,7 +10,6 @@ import javax.ejb.Remote;
 
 /**
  *
- * @author aminos
  */
 @Remote
 public interface Auth2FAFacadeRemote {

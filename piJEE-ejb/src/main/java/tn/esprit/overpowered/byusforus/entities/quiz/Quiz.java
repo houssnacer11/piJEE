@@ -19,7 +19,6 @@ import tn.esprit.overpowered.byusforus.entities.entrepriseprofile.JobOffer;
 
 /**
  *
- * @author Yassine
  */
 @Entity
 public class Quiz implements Serializable {

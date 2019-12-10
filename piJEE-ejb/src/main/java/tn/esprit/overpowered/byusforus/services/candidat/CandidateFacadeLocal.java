@@ -14,7 +14,6 @@ import tn.esprit.overpowered.byusforus.entities.users.CompanyProfile;
 
 /**
  *
- * @author EliteBook
  */
 @Local
 public interface CandidateFacadeLocal {

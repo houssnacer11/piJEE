@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author pc
  */
 @Entity
 @DiscriminatorValue( value = "WORKSHOP")

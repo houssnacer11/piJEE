@@ -24,8 +24,6 @@ import tn.esprit.overpowered.byusforus.entities.users.Professional;
 import tn.esprit.overpowered.byusforus.util.MailSender;
 
 /**
- *
- * @author EliteBook
  */
 @Stateless
 public class CandidateFacade extends AbstractFacade<Candidate>

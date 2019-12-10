@@ -16,7 +16,7 @@ import tn.esprit.overpowered.byusforus.entities.util.Skill;
 
 /**
  *
- * @author pc
+
  */
 @Entity
 @DiscriminatorValue(value = "COMPANY_ADMIN")

@@ -13,7 +13,6 @@ import tn.esprit.overpowered.byusforus.entities.users.Employee;
 
 /**
  *
- * @author pc
  */
 @Remote
 public interface EmployeeFacadeRemote {

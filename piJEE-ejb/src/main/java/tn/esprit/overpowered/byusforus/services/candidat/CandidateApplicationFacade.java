@@ -20,7 +20,6 @@ import tn.esprit.overpowered.byusforus.util.MailSender;
 
 /**
  *
- * @author Yassine
  */
 @Stateless
 public class CandidateApplicationFacade extends AbstractFacade<CandidateApplication> implements CandidateApplicationFacadeLocal, CandidateApplicationFacadeRemote {

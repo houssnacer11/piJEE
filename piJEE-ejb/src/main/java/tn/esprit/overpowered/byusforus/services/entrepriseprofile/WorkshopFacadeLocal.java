@@ -11,7 +11,6 @@ import tn.esprit.overpowered.byusforus.entities.entrepriseprofile.Workshop;
 
 /**
  *
- * @author pc
  */
 @Local
 public interface WorkshopFacadeLocal {

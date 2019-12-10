@@ -25,7 +25,6 @@ import tn.esprit.overpowered.byusforus.entities.util.Skill;
 
 /**
  *
- * @author pc
  */
 @Entity
 public abstract class Professional extends User {

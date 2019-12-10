@@ -23,7 +23,6 @@ import tn.esprit.overpowered.byusforus.entities.util.Skill;
 
 /**
  *
- * @author pc
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

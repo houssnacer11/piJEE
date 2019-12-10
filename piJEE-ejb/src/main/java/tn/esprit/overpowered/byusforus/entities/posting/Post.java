@@ -20,7 +20,6 @@ import tn.esprit.overpowered.byusforus.entities.users.User;
 
 /**
  *
- * @author aminos
  */
 @Entity
 public class Post implements Serializable {

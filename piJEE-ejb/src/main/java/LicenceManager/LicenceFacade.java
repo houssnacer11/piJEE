@@ -13,7 +13,6 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author EliteBook
  */
 @Stateless
 public class LicenceFacade extends AbstractFacade<Licence> implements LicenceFacadeRemote,LicenceFacadeLocal {

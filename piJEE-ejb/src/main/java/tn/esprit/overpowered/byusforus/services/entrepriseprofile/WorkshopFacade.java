@@ -12,7 +12,6 @@ import tn.esprit.overpowered.byusforus.entities.entrepriseprofile.Workshop;
 
 /**
  *
- * @author pc
  */
 @Stateless
 public class WorkshopFacade extends AbstractFacade<Workshop> implements WorkshopFacadeLocal, WorkshopFacadeRemote {

@@ -13,7 +13,6 @@ import tn.esprit.overpowered.byusforus.entities.entrepriseprofile.Event;
 
 /**
  *
- * @author pc
  */
 @Stateless
 public class EventFacade extends AbstractFacade<Event> implements EventFacadeLocal, EventFacadeRemote {

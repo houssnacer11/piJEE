@@ -11,7 +11,6 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author pc
  */
 
 public enum OfferStatus{

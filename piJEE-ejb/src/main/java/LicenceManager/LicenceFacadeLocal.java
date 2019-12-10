@@ -11,7 +11,6 @@ import javax.ejb.Local;
 
 /**
  *
- * @author EliteBook
  */
 @Local
 public interface LicenceFacadeLocal {

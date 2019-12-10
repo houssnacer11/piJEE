@@ -11,7 +11,6 @@ import tn.esprit.overpowered.byusforus.entities.entrepriseprofile.Event;
 
 /**
  *
- * @author pc
  */
 @Local
 public interface EventFacadeLocal {

@@ -7,7 +7,6 @@ package tn.esprit.overpowered.byusforus.util;
 
 /**
  *
- * @author EliteBook
  */
 public enum Role {
 ADMIN,

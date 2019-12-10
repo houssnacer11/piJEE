@@ -7,7 +7,6 @@ package tn.esprit.overpowered.byusforus.entities.util;
 
 /**
  *
- * @author pc
  */
 public enum Skill {
 PYTHON,

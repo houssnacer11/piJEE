@@ -13,7 +13,6 @@ import javax.persistence.Id;
 
 /**
  *
- * @author aminos
  */
 @Entity
 public class Notification implements Serializable {

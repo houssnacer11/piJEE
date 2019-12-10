@@ -11,7 +11,6 @@ import tn.esprit.overpowered.byusforus.entities.authentication.Session;
 
 /**
  *
- * @author EliteBook
  */
 @Remote
 public interface AuthenticationFacadeRemote {

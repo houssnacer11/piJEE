@@ -13,7 +13,6 @@ import tn.esprit.overpowered.byusforus.entities.util.ExpertiseLevel;
 
 /**
  *
- * @author pc
  */
 @Remote
 public interface JobOfferFacadeRemote {

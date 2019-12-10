@@ -20,7 +20,6 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  *
- * @author aminos
  */
 public class MailSender {
 

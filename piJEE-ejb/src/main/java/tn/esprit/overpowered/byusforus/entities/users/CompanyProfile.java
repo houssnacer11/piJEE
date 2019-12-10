@@ -28,7 +28,6 @@ import tn.esprit.overpowered.byusforus.entities.posting.Post;
 
 /**
  *
- * @author pc
  */
 @Entity
 public class CompanyProfile implements Serializable {

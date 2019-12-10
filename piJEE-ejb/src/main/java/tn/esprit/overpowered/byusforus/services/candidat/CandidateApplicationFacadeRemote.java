@@ -11,8 +11,6 @@ import tn.esprit.overpowered.byusforus.entities.candidat.CandidateApplication;
 import tn.esprit.overpowered.byusforus.util.JobApplicationState;
 
 /**
- *
- * @author Yassine
  */
 @Remote
 public interface CandidateApplicationFacadeRemote {

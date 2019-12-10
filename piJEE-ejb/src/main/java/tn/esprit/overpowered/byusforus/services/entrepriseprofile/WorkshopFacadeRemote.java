@@ -10,8 +10,6 @@ import javax.ejb.Remote;
 import tn.esprit.overpowered.byusforus.entities.entrepriseprofile.Workshop;
 
 /**
- *
- * @author pc
  */
 @Remote
 public interface WorkshopFacadeRemote {

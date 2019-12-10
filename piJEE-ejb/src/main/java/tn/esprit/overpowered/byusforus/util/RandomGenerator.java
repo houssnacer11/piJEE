@@ -9,7 +9,6 @@ import org.apache.commons.lang.RandomStringUtils;
 
 /**
  *
- * @author EliteBook
  */
 public class RandomGenerator {
    /*

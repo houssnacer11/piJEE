@@ -11,7 +11,6 @@ import tn.esprit.overpowered.byusforus.entities.entrepriseprofile.JobOffer;
 
 /**
  *
- * @author pc
  */
 @Local
 public interface JobOfferFacadeLocal {

@@ -24,7 +24,6 @@ import tn.esprit.overpowered.byusforus.entities.users.Candidate;
 
 /**
  *
- * @author Yassine
  */
 @Entity
 public class QuizTry implements Serializable {

@@ -22,7 +22,6 @@ import tn.esprit.overpowered.byusforus.util.MailSender;
 
 /**
  *
- * @author pc
  */
 @Stateless
 public class EmployeeFacade extends AbstractFacade<Employee> implements EmployeeFacadeLocal, EmployeeFacadeRemote {

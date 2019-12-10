@@ -7,7 +7,6 @@ package tn.esprit.overpowered.byusforus.util;
 
 /**
  *
- * @author Yassine
  */
 public enum JobApplicationState {
     PENDING, REFUSED, ACCEPTED_FOR_INTERVIEW, INVITED_FOR_QUIZ

@@ -15,7 +15,6 @@ import tn.esprit.overpowered.byusforus.entities.authentication.Auth2FA;
 
 /**
  *
- * @author aminos
  */
 @Stateful
 public class Auth2FAFacade implements Auth2FAFacadeRemote {

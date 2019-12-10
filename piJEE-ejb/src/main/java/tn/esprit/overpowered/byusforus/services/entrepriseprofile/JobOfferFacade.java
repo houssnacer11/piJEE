@@ -26,7 +26,6 @@ import tn.esprit.overpowered.byusforus.entities.util.Skill;
 
 /**
  *
- * @author pc
  */
 @Stateless
 public class JobOfferFacade extends AbstractFacade<JobOffer> implements JobOfferFacadeLocal, JobOfferFacadeRemote {

@@ -20,7 +20,6 @@ import tn.esprit.overpowered.byusforus.entities.util.Skill;
 
 /**
  *
- * @author pc
  */
 @Entity
 @DiscriminatorValue(value = "HUMAN_RESOURCES_MANAGER")

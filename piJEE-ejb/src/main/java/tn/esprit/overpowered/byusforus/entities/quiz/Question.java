@@ -22,7 +22,6 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author Yassine
  */
 @Entity
 public class Question implements Serializable {

@@ -29,7 +29,6 @@ import tn.esprit.overpowered.byusforus.util.MailSender;
 
 /**
  *
- * @author EliteBook
  */
 @Stateful
 public class AuthenticationFacade implements AuthenticationFacadeRemote {

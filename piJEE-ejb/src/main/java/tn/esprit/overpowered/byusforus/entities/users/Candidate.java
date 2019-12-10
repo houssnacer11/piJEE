@@ -14,7 +14,7 @@ import javax.persistence.InheritanceType;
 
 /**
  *
- * @author EliteBook
+
  */
 @Entity
 @DiscriminatorValue(value = "CANDIDATE")

@@ -7,7 +7,7 @@ package tn.esprit.overpowered.byusforus.entities.util;
 
 /**
  *
- * @author pc
+
  */
 public enum ExpertiseLevel {
     JUNIOR,

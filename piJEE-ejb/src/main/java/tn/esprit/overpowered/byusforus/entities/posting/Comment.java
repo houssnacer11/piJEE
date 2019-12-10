@@ -16,7 +16,6 @@ import tn.esprit.overpowered.byusforus.entities.users.User;
 
 /**
  *
- * @author aminos
  */
 @Entity
 public class Comment implements Serializable {

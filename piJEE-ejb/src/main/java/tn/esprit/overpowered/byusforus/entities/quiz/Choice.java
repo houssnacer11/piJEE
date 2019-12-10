@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author Yassine
  */
 @Entity
 public class Choice implements Serializable {
