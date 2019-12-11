@@ -9,7 +9,7 @@ import tn.esprit.overpowered.byusforus.entities.authentication.Session;
 
 /**
  *
- * @author pc
+
  */
 public class Authenticator {
     public static Session currentSession;
